@@ -1,0 +1,30 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dz.ibnrochd.master14.mappers.PatientMapper">
+
+    <!-- Result Map -->
+    <resultMap id="patientResultMap" type="dz.ibnrochd.master14.model.Patient">
+        <id property="id" column="id" />
+        <result property="nom" column="nom" />
+        <result property="prenom" column="prenom" />
+        <result property="sexe" column="sexe" />
+        <result property="dateNaissance" column="date_naissance" javaType="java.util.Date" />
+        <result property="numeroTelephone" column="numero_telephone" />
+        <result property="adresse" column="adresse" />
+        <collection property="consultations" ofType="dz.ibnrochd.master14.model.Consultation">
+            <id property="id" column="consultation_id" />
+        </collection>
+        <collection property="rendezVous" ofType="dz.ibnrochd.master14.model.RendezVous">
+            <id property="id" column="rendezvous_id" />
+        </collection>
+    </resultMap>
+
+
+    <select id="searchPatientsByNames" resultMap="patientResultMap">
+        SELECT * FROM patient WHERE nom = #{nom}
+    </select>
+
+
+</mapper>
